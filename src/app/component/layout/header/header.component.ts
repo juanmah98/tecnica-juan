@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  login:string = '0';
   constructor() { }
 
   ngOnInit(): void {

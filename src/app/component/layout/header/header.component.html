@@ -1,1 +1,55 @@
-<p>header works!</p>
+<body >
+    
+
+    <header>
+       
+        
+        <nav *ngIf="login=='0'" class="navbar bg-dark ">
+            <div class="container-fluid " >
+                <h3 class="text-light">TECNICA-JUAN</h3>               
+                <div class="navbar-content d-flex justify-content-end">
+                    
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="" rel="noopener noreferrer" class=" nav-item text-decoration-none text-light  fs-6 p-2 m-1" routerLink="general" >
+                               Home
+                            </a>
+                        </li>
+             
+                        <li class="nav-item">
+                            <a href="" rel="noopener noreferrer" class=" nav-item text-decoration-none text-light  fs-6 p-2 m-1" routerLink="general/login" >
+                               Login
+                            </a>
+                        </li>
+             
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        
+
+
+        <nav *ngIf="login=='1'" class="navbar bg-dark ">
+            <div class="container-fluid " >
+                
+               
+                <div class="navbar-content d-flex justify-content-end">
+                    
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a href="" rel="noopener noreferrer" class=" nav-item text-decoration-none text-light  fs-6 p-2 m-1" routerLink="/home" >
+                               Home
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" rel="noopener noreferrer" class=" nav-item text-decoration-none text-light  fs-6 p-2 m-1"   >
+                                Salir
+                            </a>
+                        </li>                      
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        </header>
+</body>
