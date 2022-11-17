@@ -10,6 +10,11 @@ const routes: Routes = [
     loadChildren: () => import('./general/general.module').then(m => m.GeneralModule)
   },
   {
+    path: '',
+    component: GeneralComponent,
+    loadChildren: () => import('./general/general.module').then(m => m.GeneralModule)
+  },
+  {
     path: 'user',
     component: UserComponent,
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)

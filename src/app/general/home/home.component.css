@@ -1,0 +1,13 @@
+.bg-cuadro{
+    background: url('../../../assets/Imagenes/Fondos/bgCuadro.jpg');
+    height: 200px;
+    border-radius: 15px;
+    border-color: rgb(139, 86, 0);
+    border-width: 4px;
+    border-style: solid;
+}
+
+.tarea{
+    font-family: cursive;
+    -webkit-transform: rotate(10deg);
+}

@@ -1,0 +1,23 @@
+.space{
+    padding-top: 100px;
+    padding-bottom: 10%;
+   
+}
+
+.bg-login{
+    background-image: url("../../../assets/Imagenes/Fondos/giphy.gif");
+    border-radius: 10px;
+}
+
+.pass{
+    padding-right: 7px;
+}
+
+.login{
+    font-family: Helvetica;
+    color: white;
+}
+
+.social{
+    font-size: 15px;
+}
