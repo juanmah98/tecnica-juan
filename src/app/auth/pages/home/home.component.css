@@ -1,5 +1,6 @@
-.bg-cuadro{
-    background: url('../../../assets/Imagenes/Fondos/bgCuadro.jpg');
+
+.bg-cuadro{ 
+    background: url('../../../../assets/Imagenes/Fondos/bgCuadro.jpg');
     height: 200px;
     border-radius: 15px;
     border-color: rgb(139, 86, 0);
