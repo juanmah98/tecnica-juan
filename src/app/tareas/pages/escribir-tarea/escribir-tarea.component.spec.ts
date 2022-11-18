@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralComponent } from './general.component';
+import { EscribirTareaComponent } from './escribir-tarea.component';
 
-describe('GeneralComponent', () => {
-  let component: GeneralComponent;
-  let fixture: ComponentFixture<GeneralComponent>;
+describe('EscribirTareaComponent', () => {
+  let component: EscribirTareaComponent;
+  let fixture: ComponentFixture<EscribirTareaComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GeneralComponent ]
+      declarations: [ EscribirTareaComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GeneralComponent);
+    fixture = TestBed.createComponent(EscribirTareaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

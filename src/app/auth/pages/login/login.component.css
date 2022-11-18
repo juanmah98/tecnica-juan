@@ -1,3 +1,4 @@
+
 .space{
     padding-top: 100px;
     padding-bottom: 10%;
@@ -5,7 +6,7 @@
 }
 
 .bg-login{
-    background-image: url("../../../assets/Imagenes/Fondos/giphy.gif");
+    background-image: url("../../../../assets/Imagenes/Fondos/giphy.gif");
     border-radius: 10px;
 }
 
