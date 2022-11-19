@@ -60,8 +60,8 @@ export class LoginComponent implements OnInit {
   }  
   
   ngOnInit(): void {
-     sessionStorage.setItem("login", this.login);
-    
+     
+    sessionStorage.setItem("login", '0');
        google.accounts.id.initialize({
          /* LOCAL */
             client_id: '58855272070-p13uorikkjp4k71fr4u82422p0d6tgtj.apps.googleusercontent.com',  
@@ -74,6 +74,7 @@ export class LoginComponent implements OnInit {
          { theme: "outline", size: "large" } 
        );
        google.accounts.id.prompt(); 
+      
      
    }
  
@@ -96,13 +97,14 @@ export class LoginComponent implements OnInit {
         
         sessionStorage.setItem("email", this.objetounico.email);
         sessionStorage.setItem("name", this.objetounico.name);
+        sessionStorage.setItem("login", '1');
         console.log(this.objetounico.email);   
      
     
-      
+        document.location.href = "/tareas"  
     
      }
-     console.log("Fin google btn");    
+      
    }
 
 
@@ -127,7 +129,10 @@ export class LoginComponent implements OnInit {
           this.errorEmail = ''
 
           if(this.users[i].password == this.registerForm.value.password){
-            this.errorPassword = ''
+            sessionStorage.setItem("login", '1');
+            sessionStorage.setItem("email", this.users[i].email);
+        sessionStorage.setItem("name",  this.users[i].name);
+            document.location.href = "/tareas"  
           }else this.errorPassword = 'contraseña incorrecta'
          
         }else this.errorEmail = 'el usuario no existe'
