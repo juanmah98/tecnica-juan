@@ -1,8 +1,8 @@
 <body> 
     <div class="container-fluid">
         <div class="row pt-5">
-            <div class="col-2"></div>
-            <div class="col-4">
+            <div class="col-xl-2 col-md-1  d-none d-sm-block"></div>
+            <div class="col-xl-4 col-md-5 col-sm-12 p-4 p-md-3">
                 <h2 class="pb-4">Bienvenido</h2>
                 <p class="fs-4">Aqui podras gestionar tus tareas de trabajo.</p>
                 <p class="fs-5">Podras realizar adición, modificación, eliminación y listado de tareas.</p>
@@ -12,11 +12,16 @@
                     </p>
                 </div>
             </div>
-            <div class="col-xl-4 col-md-6 col-sm-8 col-10">
-                <app-login></app-login>
+            <div class="col-xl-4 col-md-5 col-sm-12 p-4 p-md-3 mb-5 mb-sm-0">
+                <div *ngIf="registro=='0'">
+                    <app-login></app-login>
+                </div>
+                <div *ngIf="registro=='1'">
+                    <app-register></app-register>
+                </div>
             </div>
-            <div class="col-2">
-                
+            <div class="col-xl-2 col-md-1  d-none d-sm-block">
+
             </div>
         </div>
     </div>
