@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Firestore, addDoc, collectionData, doc, deleteDoc, updateDoc, docSnapshots, onSnapshot, collection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { Login } from '../interfaces/login';
+
 import { Registro } from '../interfaces/registro';
 
 @Injectable({
