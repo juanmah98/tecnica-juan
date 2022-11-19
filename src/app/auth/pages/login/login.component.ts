@@ -1,5 +1,8 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Login } from 'src/app/interfaces/user';
+import { FormBuilder, Validators } from '@angular/forms';
+import { Registro } from 'src/app/interfaces/registro';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+
 
 declare var google: any;
 
@@ -10,19 +13,54 @@ declare var google: any;
 })
 export class LoginComponent implements OnInit {
 
-  registro: string ='0';
+
   login:string = '';
- /*  usuario: Login = {
-    id: '',
-    email: ''
-  } */
   objetounico:any = {};
+  registerForm: any;
+ 
+  users:Registro[] = [];
+  errorPassword: string = '';
+  errorEmail: string = '';
 
-  constructor() { }
+  constructor( private usuarioSerivces: UsuariosService, private formBuilder: FormBuilder,) { 
+    const minPassLength = 4;
+    this.registerForm = this.formBuilder.group(
+      {
+        email: ['', [
+          Validators.required, Validators.email
+        ]], 
+        password: ['', [
+          Validators.required, Validators.minLength(minPassLength)
+        ]]
 
+      },
+            
+    )
+  }
+
+  public getError(controlName: string): string {
+    let error = '';
+    const control = this.registerForm.get(controlName);
+    if (control.touched && control.errors != null) {
+      if(controlName == 'email'){
+        error = 'email invalido'
+      }else  error = 'password invalido'
+    }
+    return error;
+  }
+
+  
+
+  message: boolean = true;
+  @Output() messageEvent = new EventEmitter<boolean>();
+
+
+  sendMessage() {
+    this.messageEvent.emit(this.message)
+  }  
+  
   ngOnInit(): void {
      sessionStorage.setItem("login", this.login);
-     sessionStorage.setItem("registro", this.registro);
     
        google.accounts.id.initialize({
          /* LOCAL */
@@ -33,9 +71,9 @@ export class LoginComponent implements OnInit {
        });
        google.accounts.id.renderButton(
          document.getElementById("buttonDiv"),
-         { theme: "outline", size: "large" }  // customization attributes
+         { theme: "outline", size: "large" } 
        );
-       google.accounts.id.prompt(); // also display the One Tap dialog
+       google.accounts.id.prompt(); 
      
    }
  
@@ -43,9 +81,7 @@ export class LoginComponent implements OnInit {
     
  
      if(response.credential){
-       this.login = "1";
-       sessionStorage.setItem("login", this.login);
-       
+         
        
        response.credential;
        
@@ -60,22 +96,9 @@ export class LoginComponent implements OnInit {
         
         sessionStorage.setItem("email", this.objetounico.email);
         sessionStorage.setItem("name", this.objetounico.name);
-        sessionStorage.setItem("picture", this.objetounico.picture);
-        console.log(this.objetounico.email);
-      
-         document.location.href = "/user"     
-
-       /*  for (var i = 0; i < this.em.length; i++) {
-          console.log("DENTRO DEL FOR");
-          if (this.objetounico.email == this.em[i]) {
-            console.log("ES IGUAL");
-          }
-        } */
-        
-       
-
-
-      
+        console.log(this.objetounico.email);   
+     
+    
       
     
      }
@@ -84,9 +107,43 @@ export class LoginComponent implements OnInit {
 
 
   registrarse(){
-    sessionStorage.setItem("registro", '1');
+   this.sendMessage();
     
   }
+
+  async log(){
+    console.log('logueo');
+    console.log(this.registerForm.value)
+    /* const respnse = await this.usuarioSerivces.addUser(this.usuario); */
+
+   await this.usuarioSerivces.getUsers().subscribe(prod => {
+  
+      this.users = prod;     
+   
+      for (var i = 0; i < this.users.length; i++) {
+        
+        console.log(this.registerForm.value.email)
+        if(this.users[i].email == this.registerForm.value.email){
+          this.errorEmail = ''
+
+          if(this.users[i].password == this.registerForm.value.password){
+            this.errorPassword = ''
+          }else this.errorPassword = 'contraseña incorrecta'
+         
+        }else this.errorEmail = 'el usuario no existe'
+      }
+    });  
+  }
+
+  errorPass(){
+    return this.errorPassword;    
+  }
+
+  errorEm(){
+    return this.errorEmail;    
+  }
+
+
 
   
 

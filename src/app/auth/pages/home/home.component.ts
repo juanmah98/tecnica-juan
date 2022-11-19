@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from 'src/app/interfaces/user';
-import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
 
@@ -11,24 +9,18 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class HomeComponent implements OnInit {
   
-  usuario: Login = {
-    id: '',
-    email: ''
-  }
   
-  constructor(private usuarioSerivces: UsuariosService) { }
+  constructor() { }
   
-  registro:string = '0';
+  registro:boolean = false;
 
-  ngOnInit(): void { 
-    this.registro = sessionStorage.getItem("registro") as string;
-    console.log(this.registro)
+  actualizar(regis: boolean) {
+    this.registro = regis;
+ }
+
+  ngOnInit(): void {    
   }
 
-  async add(){
 
-    const respnse = await this.usuarioSerivces.addUser(this.usuario);
-    console.log(respnse);
-  }
 
 }

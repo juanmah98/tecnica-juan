@@ -13,11 +13,11 @@
                 </div>
             </div>
             <div class="col-xl-4 col-md-5 col-sm-12 p-4 p-md-3 mb-5 mb-sm-0">
-                <div *ngIf="registro=='0'">
-                    <app-login></app-login>
+                <div *ngIf="!registro">
+                    <app-login (messageEvent)="actualizar($event)" ></app-login>
                 </div>
-                <div *ngIf="registro=='1'">
-                    <app-register></app-register>
+                <div *ngIf="registro">
+                    <app-register (messageEvent)="actualizar($event)"></app-register>
                 </div>
             </div>
             <div class="col-xl-2 col-md-1  d-none d-sm-block">

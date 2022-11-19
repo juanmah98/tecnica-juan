@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './auth/auth.module';
 import { TareasModule } from './tareas/tareas.module';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,8 @@ import { getFirestore, provideFirestore } from '@angular/fire/firestore';
     HttpClientModule,
     AuthModule,
     TareasModule,
+    FormsModule,
+    ReactiveFormsModule ,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
