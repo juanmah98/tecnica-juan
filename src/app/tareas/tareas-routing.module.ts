@@ -9,7 +9,7 @@ const routes: Routes = [
     children:[
       {path:'escribir', component: EscribirTareaComponent},
       {path:'leer', component: LeerTareaComponent},
-      {path:'**', redirectTo: 'leer'},
+      {path:'**', redirectTo: 'escribir'},
     ]
   }
 ];

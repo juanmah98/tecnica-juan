@@ -10,25 +10,19 @@ import { TareasService } from 'src/app/services/tareas.service';
 export class LeerTareaComponent implements OnInit {
 
   constructor(private tareasServices: TareasService) { }
-  arre:Tareas[] = [];
-  arre2:Tareas ={
-    id: 0,
-    post_id: 0,
-    name: '',
-    email: '',
-    body: ''
-  };
+  tareas:Tareas[] = [];
+  auxiliar:Tareas[]=[];
+
   ngOnInit(): void {
-    this.getAnswersAll();
-    console.log('estamos en el componente answers');
+    this.getTareas();   
   }
 
-  getAnswersAll(){
-    this.tareasServices.getTareas().subscribe({
+ async getTareas(){
+  await this.tareasServices.getTareas().subscribe({
       next: (data: any) => {
         console.log("Response");
         console.log(data);
-        this.arre=data;
+        this.tareas=data;
       },
       error: (err:any) => {
         console.log('Error de peticion');
@@ -39,27 +33,16 @@ export class LeerTareaComponent implements OnInit {
       }
       
     })
+
+    setTimeout(() =>{
+    this.auxiliar = this.tareas.filter(x => x.email == sessionStorage.getItem("email") as string)
+    console.log(this.auxiliar);
+    },500);
+    
+    
   }
 
-  async postAnswer(){
-    this.arre2 = 
-      {
-        "id": 20,
-        "post_id": 50,
-        "name": "ana",
-        "email": "anuraag_ganaka@kovacek.org",
-        "body": "ana"
-      }
-    
+  
  
-   
-  const resp = await this.tareasServices.postAnser(this.arre2)
-       .subscribe(data => {
-         console.log(data)        
-       })      
-
-       console.log(resp)
-   
-   }
 
 }
