@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Registro } from '../../../interfaces/registro';
 
 
 
@@ -10,15 +12,35 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   
   
-  constructor() { }
+  constructor(private usuariosServices: UsuariosService) { }
   
+  usuarios:Registro[] =[];
   registro:boolean = false;
-
+   email: string ="";
   actualizar(regis: boolean) {
     this.registro = regis;
  }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    
+    let email = sessionStorage.getItem("email") as string;
+    this.email = email;
+
+    this.usuariosServices.getUsers().subscribe(prod => {
+  
+      this.usuarios = prod;     
+   
+      for (var i = 0; i < this.usuarios.length; i++) {
+        
+        console.log(this.email)
+        if(this.usuarios[i].email == email){
+          console.log(this.usuarios[i].id)
+          sessionStorage.setItem("idUser", this.usuarios[i].id);          
+        }
+      
+      }
+      
+    });
   }
 
 

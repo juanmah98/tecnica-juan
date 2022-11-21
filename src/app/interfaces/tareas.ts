@@ -11,8 +11,8 @@ export interface Tareas {
     id:      number;
     post_id: number;
     name:    string;
-    email:   string;
     body:    string;
+    lista: boolean;
 }
 
 // Converts JSON strings to/from your types

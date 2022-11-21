@@ -12,9 +12,12 @@ export class HeaderComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.login = sessionStorage.getItem("login") as string;
+    
+    if(sessionStorage.getItem("login") as string == null){
+      this.login = '0';
+    }else this.login = sessionStorage.getItem("login") as string;
     this.name = sessionStorage.getItem("name") as string;
-   
+   console.log(this.login);
 
   }
 
@@ -24,6 +27,8 @@ export class HeaderComponent implements OnInit {
         this.login = '0';
         this.name = '';
         sessionStorage.setItem("login", '0');
+        sessionStorage.setItem("idUser", '');   
+        sessionStorage.setItem("length", '');                 
   }
 
 }

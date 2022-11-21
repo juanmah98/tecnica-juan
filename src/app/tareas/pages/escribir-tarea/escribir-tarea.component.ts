@@ -16,9 +16,11 @@ export class EscribirTareaComponent implements OnInit {
     id: 0,
     post_id: 0,
     name: '',
-    email: '',
-    body: ''
+    body: '',
+    lista: false
   };
+
+  id:string = '0';
 
   constructor( private tareasServices: TareasService, private formBuilder: FormBuilder,) { 
    
@@ -33,30 +35,42 @@ export class EscribirTareaComponent implements OnInit {
 
 
   ngOnInit(): void {
+   this.id = sessionStorage.getItem("length") as string
+   console.log(this.id);      
   }
 
-  write(){
 
-  }
 
   async postAnswer(){
-    this.nuevaTarea = 
+   /*  this.nuevaTarea = 
       {
-        "id": Math.random() * 100,
-        "post_id": Math.random() * 1000,
+        "id: Math.floor(Math.random()*100),
+        "post_id": Math.floor(Math.random()*1000),
         "name": this.registerForm.value.name,
         "email": sessionStorage.getItem("email") as string,
-        "body": this.registerForm.value.body
-      }
-    
- 
-   
-  const resp = await this.tareasServices.postAnser(this.nuevaTarea)
+        "body": this.registerForm.value.body,
+      } 
+      
+       const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, )
        .subscribe(data => {
          console.log(data)        
        })      
+       console.log(resp)   
+   }
+      */
 
-       console.log(resp)
+      this.nuevaTarea = {
+        id:  Number(this.id)+1,
+        post_id:Math.floor(Math.random()*1000),
+        name: this.registerForm.value.name,
+        body: this.registerForm.value.body,
+        lista: false
+      };  
+ 
    
+  const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, sessionStorage.getItem("idUser") as string);  
+       console.log(resp)   
+
+       this.ngOnInit();
    }
 }

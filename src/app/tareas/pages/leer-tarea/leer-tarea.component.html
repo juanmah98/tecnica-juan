@@ -1,29 +1,25 @@
 <body> 
     <div class="container-fluid">
-        
-      
+              <div class="row mt-4" >             
+                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3 "*ngFor="let tareas of tareas">
 
+                    <div class="p-3 estilo shadow " [ngClass]="tareas.lista == false ? 'estilo' : 'estiloListo' " >
 
-            
-              
-              <div class="row mt-4" >
-             
-                <div class="col-xl-3 col-md-4 col-sm-6 col-12 mb-3 "*ngFor="let tareas of auxiliar">
-
-                    <div class="p-3 estilo shadow">
-
-                        <p class="fs-5 fw-bold">{{tareas.name}}</p>
+                        <p class="text-center fs-5 fw-bold">{{tareas.name}}</p>
                         <p class="fs-6">{{tareas.body}}</p>
 
+                        <div  class="text-center pt-2" *ngIf="tareas.lista==false">
+                            <button class="btn btn-dark mx-2" (click)="tareaLista(tareas)">Tarea lista</button>
+                            <button class="btn btn-danger">Editar tarea</button>
+                        </div>
+                       
+                        <div class="text-center pt-2" *ngIf="tareas.lista==true">
+
+                            <button class="btn btn-danger"  (click)="eliminarTarea(tareas)" >Eliminar tarea</button>
+                        </div>
+
                     </div>
-
-
-
-              
               </div>
             </div>
             </div>
-        
-   
-   
 </body>

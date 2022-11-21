@@ -1,4 +1,9 @@
 .estilo{
-    background-color: rgb(184, 224, 255); 
+    background-color: blanchedalmond; 
+    border-radius: 5px;
+}
+
+.estiloListo{
+    background-color: rgb(206, 255, 205); 
     border-radius: 10px;
 }

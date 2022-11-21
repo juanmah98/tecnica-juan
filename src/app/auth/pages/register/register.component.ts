@@ -109,7 +109,8 @@ export class RegisterComponent implements OnInit {
     }
    const response = await this.usuarioSerivces.addUser(newUser);
     console.log(response);
-
+    sessionStorage.setItem("idUser", '');   
+    sessionStorage.setItem("length", '');  
     document.location.href = "/tareas"  
   }
 
