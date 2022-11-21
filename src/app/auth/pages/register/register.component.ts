@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   errorPass2:string = '';
   users:Registro[] = [];
   errorEmail:string = '';
+  aux: boolean = false;
 
   constructor( private usuarioSerivces: UsuariosService, private formBuilder: FormBuilder,) { 
     const minPassLength = 4;
@@ -66,6 +67,7 @@ export class RegisterComponent implements OnInit {
   
       this.users = prod;         
     });  
+    this.aux = false;
   }
 
   errorPass(){
@@ -100,18 +102,25 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  async register(){   
+  register(){   
+    this.aux = true;
     const newUser: Registro = {
       id: '',
       name: this.registerForm.value.name,
       email: this.registerForm.value.email,
       password: this.registerForm.value.password
     }
-   const response = await this.usuarioSerivces.addUser(newUser);
+   const response = this.usuarioSerivces.addUser(newUser);
     console.log(response);
-    sessionStorage.setItem("idUser", '');   
     sessionStorage.setItem("length", '');  
-    document.location.href = "/tareas"  
+    sessionStorage.setItem("login", '1');
+    sessionStorage.setItem("email", this.registerForm.value.email);
+    sessionStorage.setItem("name",this.registerForm.value.name,);
+    setTimeout(() => {
+      document.location.href = "/tareas"  
+    },1000)
+ 
+   
   }
 
 

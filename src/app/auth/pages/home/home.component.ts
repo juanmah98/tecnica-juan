@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit {
   constructor(private usuariosServices: UsuariosService) { }
   
   usuarios:Registro[] =[];
+  email: string ="";
   registro:boolean = false;
-   email: string ="";
   actualizar(regis: boolean) {
     this.registro = regis;
  }

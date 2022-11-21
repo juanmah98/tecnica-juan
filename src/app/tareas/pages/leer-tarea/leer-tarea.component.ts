@@ -53,12 +53,7 @@ export class LeerTareaComponent implements OnInit {
     this.auxiliar = this.tareas.filter(x => x.email == sessionStorage.getItem("email") as string)
     console.log(this.auxiliar);
     },500); */ 
-    console.log("GET TAREAS")
-    console.log(sessionStorage.getItem("idUser"));
-    console.log(this.tareas)
 
-    console.log("Inout");
-    console.log(this.idUser);
    await this.tareasServices.getTareasCloud(this.idUser).subscribe(prod => {  
       this.tareas = prod;
       sessionStorage.setItem("length", String(prod.length));          

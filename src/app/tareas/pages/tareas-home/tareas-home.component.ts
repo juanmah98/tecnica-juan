@@ -40,10 +40,9 @@ this.auxiliar();
    
       for (var i = 0; i < this.usuarios.length; i++) {
         
-        console.log(this.email)
+        
         if(this.usuarios[i].email == email){
-          this.bandera = true;
-          console.log(this.usuarios[i].id)          
+          this.bandera = true;                
           this.idUsuario = this.usuarios[i].id
         }
       
@@ -51,9 +50,7 @@ this.auxiliar();
       
     });
 
-    setTimeout(() => {
-      console.log("antes del if")
-      console.log(this.bandera)
+    setTimeout(() => {     
           if(this.bandera == false){
             this.nuevoRegistro.email = email;
       

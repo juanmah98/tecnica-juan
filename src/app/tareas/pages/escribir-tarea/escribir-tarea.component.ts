@@ -39,7 +39,6 @@ export class EscribirTareaComponent implements OnInit {
 
   ngOnInit(): void {
    this.id = sessionStorage.getItem("length") as string
-   console.log(this.id);      
   }
 
 
@@ -74,6 +73,7 @@ export class EscribirTareaComponent implements OnInit {
   const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, this.idUser);  
        console.log(resp)   
 
+       
        this.ngOnInit();
    }
 }

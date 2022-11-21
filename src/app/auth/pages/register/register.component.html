@@ -15,7 +15,7 @@
                <input type="text" placeholder="Email" class="rounded shadow px-3 " formControlName="email" style="border: none;">   
             </div>
             <span class="error">{{ getError('email')}}</span>            
-            <span class="error">{{ emailDuplicado()}}</span>            
+            <span *ngIf="!aux" class="error">{{ emailDuplicado()}}</span>            
     
              <div class="pt-2 justify-content-center">
                <input type="password" placeholder="Contraseña" class="rounded shadow px-3 " formControlName="password" style="border: none;">   
