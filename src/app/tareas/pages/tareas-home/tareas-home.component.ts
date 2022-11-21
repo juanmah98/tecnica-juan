@@ -10,6 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class TareasHomeComponent implements OnInit {
 
   usuarios:Registro[] =[];
+  idUsuario = '';
   email: string ="";
    bandera:boolean = false;
    nuevoRegistro:Registro = {
@@ -42,8 +43,8 @@ this.auxiliar();
         console.log(this.email)
         if(this.usuarios[i].email == email){
           this.bandera = true;
-          console.log(this.usuarios[i].id)
-          sessionStorage.setItem("idUser", this.usuarios[i].id);          
+          console.log(this.usuarios[i].id)          
+          this.idUsuario = this.usuarios[i].id
         }
       
       }

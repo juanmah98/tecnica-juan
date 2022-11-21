@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Tareas } from 'src/app/interfaces/tareas';
 import { TareasService } from 'src/app/services/tareas.service';
@@ -19,6 +19,9 @@ export class EscribirTareaComponent implements OnInit {
     body: '',
     lista: false
   };
+
+  
+  @Input() idUser = '';
 
   id:string = '0';
 
@@ -68,7 +71,7 @@ export class EscribirTareaComponent implements OnInit {
       };  
  
    
-  const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, sessionStorage.getItem("idUser") as string);  
+  const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, this.idUser);  
        console.log(resp)   
 
        this.ngOnInit();

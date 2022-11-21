@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Tareas } from 'src/app/interfaces/tareas';
 import { TareasService } from 'src/app/services/tareas.service';
 
@@ -12,6 +12,8 @@ export class LeerTareaComponent implements OnInit {
   constructor(private tareasServices: TareasService) { }
   tareas:Tareas[] = [];
   auxiliar:Tareas[]=[];
+
+  @Input() idUser = '';
 
   ngOnInit(): void {   
    /* setTimeout(() => {
@@ -55,7 +57,9 @@ export class LeerTareaComponent implements OnInit {
     console.log(sessionStorage.getItem("idUser"));
     console.log(this.tareas)
 
-   await this.tareasServices.getTareasCloud(sessionStorage.getItem("idUser") as string).subscribe(prod => {  
+    console.log("Inout");
+    console.log(this.idUser);
+   await this.tareasServices.getTareasCloud(this.idUser).subscribe(prod => {  
       this.tareas = prod;
       sessionStorage.setItem("length", String(prod.length));          
       console.log(prod);
@@ -68,14 +72,14 @@ export class LeerTareaComponent implements OnInit {
   tareaLista(tarea: Tareas){
 
     tarea.lista = true;
-    this.tareasServices.putTareaCloud(tarea, sessionStorage.getItem("idUser") as string);
+    this.tareasServices.putTareaCloud(tarea, this.idUser);
 
   }
 
   eliminarTarea(tarea: Tareas){
 
     tarea.lista = true;
-    this.tareasServices.deleteTareaCloud(tarea, sessionStorage.getItem("idUser") as string);
+    this.tareasServices.deleteTareaCloud(tarea, this.idUser);
 
   }
 
