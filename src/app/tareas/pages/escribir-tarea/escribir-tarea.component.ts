@@ -13,7 +13,7 @@ export class EscribirTareaComponent implements OnInit {
   registerForm:any;
  
   nuevaTarea:Tareas ={
-    id: 0,
+    id: '',
     post_id: 0,
     name: '',
     body: '',
@@ -62,8 +62,8 @@ export class EscribirTareaComponent implements OnInit {
       */
 
       this.nuevaTarea = {
-        id:  Number(this.id)+1,
-        post_id:Math.floor(Math.random()*1000),
+        id: '' ,
+        post_id:Number(this.id)+1,
         name: this.registerForm.value.name,
         body: this.registerForm.value.body,
         lista: false
@@ -75,5 +75,12 @@ export class EscribirTareaComponent implements OnInit {
 
        
        this.ngOnInit();
+
+       this.clear();
    }
+
+   clear() {
+    console.log("clear clicked")
+    this.registerForm.reset();
+  }
 }

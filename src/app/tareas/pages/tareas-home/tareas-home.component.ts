@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Registro } from 'src/app/interfaces/registro';
+import { Tareas } from 'src/app/interfaces/tareas';
+import { TareasService } from 'src/app/services/tareas.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -19,11 +21,12 @@ export class TareasHomeComponent implements OnInit {
      password: '',
      name: ''
    }
-  constructor(private usuariosServices: UsuariosService) { }
+   tareas:Tareas[] = [];
+  constructor(private usuariosServices: UsuariosService, private tareasServices:TareasService) { }
 
   ngOnInit(): void {
-
-this.auxiliar();
+    this.auxiliar();
+    
    
   }
 
@@ -31,7 +34,7 @@ this.auxiliar();
      /* OBTENGO EL ID DE LA TABLA USER CON EL EMAIL DEL USUARIO. AL IGUAL QUE,
     GUARDO EN FIRESTORE EL EMAIL CON INICIO DE SECION GOOGLE SI ES LA PRIMERA VES QUE ENTRA */
     
-    let email = sessionStorage.getItem("email") as string;
+    let email = await sessionStorage.getItem("email") as string;
     this.email = email;
 
     await this.usuariosServices.getUsers().subscribe(prod => {
@@ -43,20 +46,40 @@ this.auxiliar();
         
         if(this.usuarios[i].email == email){
           this.bandera = true;                
-          this.idUsuario = this.usuarios[i].id
+          this.idUsuario = this.usuarios[i].id;
+          console.log("for");
+          console.log(this.idUsuario)
+          this.getTareas();
         }
       
       }
       
     });
 
-    setTimeout(() => {     
+   await setTimeout(() => {     
           if(this.bandera == false){
             this.nuevoRegistro.email = email;
       
-            this.usuariosServices.addUser(this.nuevoRegistro);           
+         this.usuariosServices.addUser(this.nuevoRegistro);           
           }       
-    },500)
+       
+    },1000)
+   
+  }
+
+ async getTareas(){
+  console.log("home tarea")
+  console.log(this.idUsuario)
+    await this.tareasServices.getTareasCloud(this.idUsuario).subscribe(prod => {  
+      this.tareas = prod.sort((a, b) => {
+        return a.post_id - b.post_id;
+      });
+      /* this.tareas = prod; */
+      sessionStorage.setItem("length", String(prod.length));    
+      
+      console.log(prod);
+  
+    });
   }
 
 }

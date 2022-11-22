@@ -14,6 +14,7 @@ export class LeerTareaComponent implements OnInit {
   auxiliar:Tareas[]=[];
 
   @Input() idUser = '';
+  @Input() arreglo:Tareas[] = [];
 
   ngOnInit(): void {   
    /* setTimeout(() => {
@@ -22,10 +23,10 @@ export class LeerTareaComponent implements OnInit {
  */
    
      
-      setTimeout(() => {
+     /*  setTimeout(() => {
         this.getTareas();
       },500)
-   
+    */
 
   }
 

@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   login:string = '';
   objetounico:any = {};
   registerForm: any;
- 
+ aux:boolean = false;
   users:Registro[] = [];
   errorPassword: string = '';
   errorEmail: string = '';
@@ -60,22 +60,26 @@ export class LoginComponent implements OnInit {
   }  
   
   ngOnInit(): void {
-     
-    sessionStorage.setItem("login", '0');
-       google.accounts.id.initialize({
-         /* LOCAL */
-            client_id: '58855272070-p13uorikkjp4k71fr4u82422p0d6tgtj.apps.googleusercontent.com',  
-         /*  */
-        /*    client_id: '501716064015-ghs2q8lm72me0bk9784ukjphu5p49jnj.apps.googleusercontent.com',     */
-         callback: this.handleCredentialResponse
-       });
-       google.accounts.id.renderButton(
-         document.getElementById("buttonDiv"),
-         { theme: "outline", size: "large" } 
-       );
-       google.accounts.id.prompt(); 
+     this.aux=false;
+   this.googleLog();
       
      
+   }
+
+  async googleLog(){
+    sessionStorage.setItem("login", '0');
+   await google.accounts.id.initialize({
+      /* LOCAL */
+      client_id: '58855272070-p13uorikkjp4k71fr4u82422p0d6tgtj.apps.googleusercontent.com',  
+      /*  */
+      /*  client_id: '58855272070-ddl9hj8uq3e3vs79cnflfdmckl3usm65.apps.googleusercontent.com',      */
+      callback: this.handleCredentialResponse
+    });
+    google.accounts.id.renderButton(
+      document.getElementById("buttonDiv"),
+      { theme: "outline", size: "large" } 
+    );
+    google.accounts.id.prompt(); 
    }
  
    handleCredentialResponse(response:any){
@@ -114,6 +118,8 @@ export class LoginComponent implements OnInit {
   }
 
   async log(){
+    this.errorEmail = 'el usuario no existe'
+    this.errorPassword = ''
     console.log('logueo');
     console.log(this.registerForm.value)
     /* const respnse = await this.usuarioSerivces.addUser(this.usuario); */
@@ -132,10 +138,11 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem("login", '1');
             sessionStorage.setItem("email", this.users[i].email);
         sessionStorage.setItem("name",  this.users[i].name);
+        this.aux=true;
             document.location.href = "/tareas"  
           }else this.errorPassword = 'contraseña incorrecta'
          
-        }else this.errorEmail = 'el usuario no existe'
+        }
       }
     });  
   }

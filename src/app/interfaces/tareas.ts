@@ -8,7 +8,7 @@
 // match the expected interface, even if the JSON is valid.
 
 export interface Tareas {
-    id:      number;
+    id:      string;
     post_id: number;
     name:    string;
     body:    string;
