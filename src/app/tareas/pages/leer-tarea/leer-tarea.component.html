@@ -10,7 +10,7 @@
 
                         <div  class="text-center pt-2" *ngIf="tareas.lista==false">
                             <button class="btn btn-dark mx-2" (click)="tareaLista(tareas)">Tarea lista</button>
-                            <button class="btn btn-danger">Editar tarea</button>
+                            <button class="btn btn-danger " (click)="editarTarea(tareas)" data-bs-toggle="modal" data-bs-target="#exampleModa">Editar tarea</button>
                         </div>
                        
                         <div class="text-center pt-2" *ngIf="tareas.lista==true">
@@ -22,4 +22,43 @@
               </div>
             </div>
             </div>
+
+            <div class="modal fade" id="exampleModa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h3 class="modal-title fw-bold" id="exampleModalLabel">Editar tarea</h3>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body " style="background-color: rgb(223, 223, 223);"> 
+                        <form   [formGroup]="registerForm" (onSubmit)="onEdit()">
+                            <div class="pt-0">
+                                
+                                <input [(ngModel)]='titulo' type="text" placeholder="Titulo tarea" class="rounded shadow px-3 " formControlName="name" style="border: none; width: 100%">                       
+                               
+                            </div>
+                           
+                    
+                            <div class="pt-2 justify-content-center">
+                                
+                                <textarea [(ngModel)]='body' type="text" placeholder="Tarea" formControlName="body" class="rounded shadow px-3 " style="border: none; width: 100% "></textarea>
+                            </div>
+                        
+                      
+                            <div class="pt-3 text-center">                                    
+                    
+                                <button  class="btn btn-danger px-4 mx-1" type="submit" data-bs-dismiss="modal" aria-label="Close" (click)="onEdit()">
+                                    Editar
+                                </button>
+                            </div>           
+                            
+                        </form>
+                    </div>
+                    <div class="modal-footer justify-content-center" style="background-color: rgb(223, 223, 223);">
+                   
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
 </body>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Tareas } from 'src/app/interfaces/tareas';
 import { TareasService } from 'src/app/services/tareas.service';
 
@@ -9,24 +10,32 @@ import { TareasService } from 'src/app/services/tareas.service';
 })
 export class LeerTareaComponent implements OnInit {
 
-  constructor(private tareasServices: TareasService) { }
   tareas:Tareas[] = [];
   auxiliar:Tareas[]=[];
-
+  registerForm:any;
   @Input() idUser = '';
   @Input() arreglo:Tareas[] = [];
+  titulo:string='';
+  body:string='';
+
+  tareaEditar:Tareas ={
+    id: '',
+    post_id: 0,
+    name: '',
+    body: '',
+    lista: false
+  };
+  constructor(private tareasServices: TareasService, private formBuilder: FormBuilder) { 
+    this.registerForm = this.formBuilder.group(
+      {
+        name: [''], 
+        body: [''], 
+      },
+            
+    )
+  }
 
   ngOnInit(): void {   
-   /* setTimeout(() => {
-     this.getTareas()   ;
-    },500) 
- */
-   
-     
-     /*  setTimeout(() => {
-        this.getTareas();
-      },500)
-    */
 
   }
 
@@ -76,7 +85,24 @@ export class LeerTareaComponent implements OnInit {
 
     tarea.lista = true;
     this.tareasServices.deleteTareaCloud(tarea, this.idUser);
+    
 
+  }
+
+  editarTarea(tarea:Tareas){
+    this.titulo = tarea.name;
+    this.body=tarea.body;
+    this.tareaEditar = tarea;
+
+  }
+
+  async onEdit(){ 
+ 
+    
+    this.tareaEditar.name = this.registerForm.value.name;
+    this.tareaEditar.body =  this.registerForm.value.body;
+    
+    const response = await this.tareasServices.putTareaCloud(this.tareaEditar, this.idUser);   
   }
 
   

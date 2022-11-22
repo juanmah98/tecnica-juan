@@ -25,7 +25,7 @@ export class EscribirTareaComponent implements OnInit {
 
   id:string = '0';
 
-  constructor( private tareasServices: TareasService, private formBuilder: FormBuilder,) { 
+  constructor( private tareasServices: TareasService, private formBuilder: FormBuilder) { 
    
     this.registerForm = this.formBuilder.group(
       {
