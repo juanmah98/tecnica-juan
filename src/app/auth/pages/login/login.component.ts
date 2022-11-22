@@ -104,7 +104,7 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem("login", '1');
         console.log(this.objetounico.email);   
      
-    
+        
         document.location.href = "/tareas"  
     
      }

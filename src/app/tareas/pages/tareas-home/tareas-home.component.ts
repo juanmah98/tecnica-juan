@@ -59,11 +59,9 @@ export class TareasHomeComponent implements OnInit {
    await setTimeout(() => {     
           if(this.bandera == false){
             this.nuevoRegistro.email = email;
-      
          this.usuariosServices.addUser(this.nuevoRegistro);           
-          }       
-       
-    },1000)
+          }              
+    },1500)
    
   }
 
