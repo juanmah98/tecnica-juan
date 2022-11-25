@@ -17,9 +17,6 @@ export class HeaderComponent implements OnInit {
     this.login = this.userServices.getLogin();
     
     this.name = this.userServices.getNamel();
-    console.log("login")
-    console.log(this.login)
-   
 
   }
 

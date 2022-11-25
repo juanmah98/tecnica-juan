@@ -116,8 +116,6 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.value.password
     }
 
-   
-    console.log(aux)
     if(aux == ''){
         this.newUser = true;
         sessionStorage.setItem("length", '');  

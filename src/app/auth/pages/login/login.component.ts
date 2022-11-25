@@ -122,7 +122,6 @@ export class LoginComponent implements OnInit {
   async log(){
     this.errorEmail = ''
     this.errorPassword = ''   
-    console.log("LOGIN")
    await this.usuarioSerivces.getUsers().subscribe(prod => {
   
       this.users = prod;     
