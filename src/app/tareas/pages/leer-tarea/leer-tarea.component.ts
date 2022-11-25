@@ -41,7 +41,8 @@ export class LeerTareaComponent implements OnInit {
 
  async getTareas(){
 
-  /* await this.tareasServices.getTareas().subscribe({
+  /*  ****** METODO GET CON API (API free con fallas) *******
+   await this.tareasServices.getTareas().subscribe({
       next: (data: any) => {
         console.log("Response");
         console.log(data);
@@ -58,17 +59,8 @@ export class LeerTareaComponent implements OnInit {
     }) */
 
 
-
-    /* setTimeout(() =>{
-    this.auxiliar = this.tareas.filter(x => x.email == sessionStorage.getItem("email") as string)
-    console.log(this.auxiliar);
-    },500); */ 
-
    await this.tareasServices.getTareasCloud(this.idUser).subscribe(prod => {  
-      this.tareas = prod;
-      /* sessionStorage.setItem("length", String(prod.length));   */        
-     
-  
+      this.tareas = prod;      
     });
   
     
@@ -104,8 +96,5 @@ export class LeerTareaComponent implements OnInit {
     
     await this.tareasServices.putTareaCloud(this.tareaEditar, this.idUser);   
   }
-
-  
- 
 
 }

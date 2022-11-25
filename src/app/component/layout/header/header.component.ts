@@ -24,10 +24,6 @@ export class HeaderComponent implements OnInit {
   }
 
   salir(){
-   /*  this.userServices.addEmail('');
-    this.userServices.addName('');
-    this.userServices.addIdUser('');
-    this.userServices.logoutUser(false); */
 
         sessionStorage.setItem("email", '');
         sessionStorage.setItem("name", ''); 

@@ -44,23 +44,7 @@ export class EscribirTareaComponent implements OnInit {
 
 
 
-  async postAnswer(){
-   /*  this.nuevaTarea = 
-      {
-        "id: Math.floor(Math.random()*100),
-        "post_id": Math.floor(Math.random()*1000),
-        "name": this.registerForm.value.name,
-        "email": sessionStorage.getItem("email") as string,
-        "body": this.registerForm.value.body,
-      } 
-      
-       const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, )
-       .subscribe(data => {
-         console.log(data)        
-       })      
-       console.log(resp)   
-   }
-      */
+  async postAnswer(){ 
 
       this.nuevaTarea = {
         id: '' ,
@@ -73,8 +57,6 @@ export class EscribirTareaComponent implements OnInit {
    
   await this.tareasServices.postTareaCloud(this.nuevaTarea, this.idUser);  
       
-
-  
        this.clear();
        this.ngOnInit();
 
