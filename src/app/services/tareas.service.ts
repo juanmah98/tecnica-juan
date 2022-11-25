@@ -30,22 +30,18 @@ export class TareasService {
   postTarea(tarea:Tareas): Observable<Tareas>{   
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.appKey);
     const body=JSON.stringify(tarea);
-    console.log(body);
     return this.http.post<Tareas>(this.baseURL,tarea,{headers: headers})
   }
 
   putTarea(tarea:Tareas):Observable<Tareas>{
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.appKey);
     const body=JSON.stringify(tarea);
-    console.log(body);
     return this.http.put<Tareas>(this.baseURL, body, { headers: headers })  
   }
 
   BookDelete (tarea:Tareas):Observable<Tareas>{
     const headers = new HttpHeaders().set('Authorization', 'Bearer ' + this.appKey);
     const body=JSON.stringify(tarea);
-    
-    console.log(body);
     return this.http.delete<Tareas>(this.baseURL+"/"+tarea.id + { headers: headers });
   }
 
@@ -66,7 +62,6 @@ deleteTareaCloud(pedido: Tareas, id: string){
 }
 
 putTareaCloud(pedido: Tareas, id:string) {
-  console.log("id Service: "+pedido.id)
   const pokemonDocumentReference = doc(
     this.firestore,
     `user/${id}/tarea/${pedido.id}`      

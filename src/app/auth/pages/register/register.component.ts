@@ -116,15 +116,7 @@ export class RegisterComponent implements OnInit {
       password: this.registerForm.value.password
     }
 
-   
-    console.log(aux)
     if(aux == ''){
-
-    /*   this.usuarioSerivces.addEmail(this.registerForm.value.email)
-      this.usuarioSerivces.addName(this.registerForm.value.name)
-      
-      this.usuarioSerivces.loginUser(true); */
-
         this.newUser = true;
         sessionStorage.setItem("length", '');  
         sessionStorage.setItem("login", '1');

@@ -30,8 +30,6 @@ export class TareasHomeComponent implements OnInit {
     /* this.auxiliar(); */
     this.email = this.usuariosServices.getEmail();
     this.idUsuario =  this.usuariosServices.getIdUser();
-    console.log(this.idUsuario)
-    console.log(this.email);
     this.getTareas(this.idUsuario);
    
   }

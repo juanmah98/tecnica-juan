@@ -67,7 +67,10 @@ export class LoginComponent implements OnInit {
      
    }
 
- /*  async googleLog(){
+ /*  
+ ****** LOGIN CON GOOGLE DESHABILITADO, ASI SERIA SU FUNCIONAMIENTO *******
+
+ async googleLog(){
     sessionStorage.setItem("login", '0');
    await google.accounts.id.initialize({
    
@@ -119,7 +122,6 @@ export class LoginComponent implements OnInit {
   async log(){
     this.errorEmail = ''
     this.errorPassword = ''   
-    console.log("LOGIN")
    await this.usuarioSerivces.getUsers().subscribe(prod => {
   
       this.users = prod;     
@@ -131,16 +133,11 @@ export class LoginComponent implements OnInit {
           this.errorEmail = ''
 
           if(this.users[i].password == this.registerForm.value.password){
-          /*   this.usuarioSerivces.addEmail(this.users[i].email)
-            this.usuarioSerivces.addIdUser(this.users[i].id)
-            this.usuarioSerivces.addName(this.users[i].name)
-            this.usuarioSerivces.loginUser(true); */
-
             sessionStorage.setItem("login", '1');
             sessionStorage.setItem("id", this.users[i].id);
             sessionStorage.setItem("email", this.users[i].email);
-        sessionStorage.setItem("name",  this.users[i].name); 
-        this.aux=true;
+            sessionStorage.setItem("name",  this.users[i].name); 
+            this.aux=true;
             document.location.href = "/tareas"  
           }else{ this.errorPassword = 'contraseña incorrecta';  this.aux=true;}
          
@@ -156,9 +153,5 @@ export class LoginComponent implements OnInit {
   errorEm(){
     return this.errorEmail;    
   }
-
-
-
-  
 
 }

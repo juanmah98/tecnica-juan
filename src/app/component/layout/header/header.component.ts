@@ -17,17 +17,10 @@ export class HeaderComponent implements OnInit {
     this.login = this.userServices.getLogin();
     
     this.name = this.userServices.getNamel();
-    console.log("login")
-    console.log(this.login)
-   
 
   }
 
   salir(){
-   /*  this.userServices.addEmail('');
-    this.userServices.addName('');
-    this.userServices.addIdUser('');
-    this.userServices.logoutUser(false); */
 
         sessionStorage.setItem("email", '');
         sessionStorage.setItem("name", ''); 
