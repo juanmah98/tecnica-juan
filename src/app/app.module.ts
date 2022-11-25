@@ -12,6 +12,8 @@ import { AuthModule } from './auth/auth.module';
 import { TareasModule } from './tareas/tareas.module';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuariosService } from './services/usuarios.service';
+import { TareasService } from './services/tareas.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
   ],
-  providers: [],
+  providers: [UsuariosService, TareasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,9 +13,11 @@ export class RegisterComponent implements OnInit {
   errorPass2:string = '';
   users:Registro[] = [];
   errorEmail:string = '';
+  aux: boolean = false;
+  newUser:boolean = false;
 
   constructor( private usuarioSerivces: UsuariosService, private formBuilder: FormBuilder,) { 
-    const minPassLength = 4;
+    const minPassLength = 1;
     this.registerForm = this.formBuilder.group(
       { 
         
@@ -62,10 +64,12 @@ export class RegisterComponent implements OnInit {
   }  
 
   ngOnInit(): void {
+    this.newUser = false;
     this.usuarioSerivces.getUsers().subscribe(prod => {
   
       this.users = prod;         
     });  
+    this.aux = false;
   }
 
   errorPass(){
@@ -79,19 +83,21 @@ export class RegisterComponent implements OnInit {
 
  emailDuplicado(){  
   this.errorEmail = '';  
+  this.aux=true;
   let cont = 0;
 
     this.users.forEach(b => {
       if(b.email == this.registerForm.value.email){       
-        cont ++;
+        cont ++;        
       }    
     })
 
-    if(cont == 1){
+    if(cont > 0 ){
       this.errorEmail = 'el usuario ya existe'; 
+      this.aux = false;
     }   
   
-    return this.errorEmail;
+    return  this.errorEmail;
   }
 
   back(){
@@ -100,17 +106,52 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  async register(){   
+ async register(){   
+  const aux = await this.emailDuplicado()
+    
     const newUser: Registro = {
       id: '',
       name: this.registerForm.value.name,
       email: this.registerForm.value.email,
       password: this.registerForm.value.password
     }
-   const response = await this.usuarioSerivces.addUser(newUser);
-    console.log(response);
 
-    document.location.href = "/tareas"  
+   
+    console.log(aux)
+    if(aux == ''){
+
+    /*   this.usuarioSerivces.addEmail(this.registerForm.value.email)
+      this.usuarioSerivces.addName(this.registerForm.value.name)
+      
+      this.usuarioSerivces.loginUser(true); */
+
+        this.newUser = true;
+        sessionStorage.setItem("length", '');  
+        sessionStorage.setItem("login", '1');
+        sessionStorage.setItem("email", this.registerForm.value.email);
+        sessionStorage.setItem("name",this.registerForm.value.name,);
+        this.usuarioSerivces.addUser(newUser);     
+
+        await this.usuarioSerivces.getUsers().subscribe(prod => {
+  
+          this.users = prod;     
+       
+          for (var i = 0; i < this.users.length; i++) {
+            
+           
+            if(this.users[i].email == this.registerForm.value.email){
+              
+              sessionStorage.setItem("id", this.users[i].id);
+             
+            }
+          }
+        });  
+        setTimeout(() => {
+           document.location.href = "/tareas";  
+        },4000)
+    }
+ 
+   
   }
 
 

@@ -1,0 +1,11 @@
+.estilo{
+    background-color: blanchedalmond; 
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+
+.estiloListo{
+    background-color: rgb(206, 255, 205); 
+    border-radius: 10px;
+    word-wrap: break-word;
+}

@@ -1,0 +1,15 @@
+<body> 
+    <div class="container-fluid">
+        <div class="row pt-3">
+            
+            <div class="col-12 p-4 p-md-2">
+                <app-escribir-tarea [idUser]="idUsuario"></app-escribir-tarea>
+            </div>
+            
+            <div class="col-12">
+                <app-leer-tarea  [idUser]="idUsuario"  [arreglo]="tareas"></app-leer-tarea>
+            </div>
+          
+        </div>
+    </div>
+</body>

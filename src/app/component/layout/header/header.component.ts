@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-header',
@@ -9,21 +11,33 @@ export class HeaderComponent implements OnInit {
 
   login:string = '0';
   name:string = '';
-  constructor() { }
+  constructor(private userServices: UsuariosService) { }
 
   ngOnInit(): void {
-    this.login = sessionStorage.getItem("login") as string;
-    this.name = sessionStorage.getItem("name") as string;
+    this.login = this.userServices.getLogin();
+    
+    this.name = this.userServices.getNamel();
+    console.log("login")
+    console.log(this.login)
    
 
   }
 
   salir(){
+   /*  this.userServices.addEmail('');
+    this.userServices.addName('');
+    this.userServices.addIdUser('');
+    this.userServices.logoutUser(false); */
+
         sessionStorage.setItem("email", '');
-        sessionStorage.setItem("name", '');
+        sessionStorage.setItem("name", ''); 
         this.login = '0';
         this.name = '';
-        sessionStorage.setItem("login", '0');
+        sessionStorage.setItem("login", '0');  
+        sessionStorage.setItem("length", '');    
+        setTimeout(() => {
+          document.location.href = "/general";  
+       },1000)
   }
 
 }

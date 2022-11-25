@@ -1,1 +1,54 @@
-<p>escribir-tarea works!</p>
+<body> 
+   
+        
+            
+            <div class="text-center">
+                <h2 class="pb-4 ">TAREAS</h2>               
+
+                <button class="btn btn-dark mx-2 mb-1" data-bs-toggle="modal" data-bs-target="#exampleModal2">Nueva tarea <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                  </svg></button>
+
+                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h3 class="modal-title fw-bold" id="exampleModalLabel">Nueva tarea</h3>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body " style="background-color: rgb(223, 223, 223);"> 
+                            <form   [formGroup]="registerForm" (onSubmit)="postAnswer()" >
+                                <div class="pt-0">
+                                    
+                                    <input type="text" placeholder="Titulo tarea" class="rounded shadow px-3 " formControlName="name" style="border: none; width: 100%">                       
+                                   
+                                </div>
+                               
+                        
+                                <div class="pt-2 justify-content-center">
+                                    
+                                    <textarea type="text" placeholder="Tarea" formControlName="body" class="rounded shadow px-3 " style="border: none; width: 100% "></textarea>
+                                </div>
+                            
+                          
+                                <div class="pt-3 text-center">                                    
+                        
+                                    <button  class="btn btn-warning px-4 mx-1" type="submit" data-bs-dismiss="modal" aria-label="Close"(click)="postAnswer()">
+                                        Guardar
+                                    </button>
+                                </div>           
+                                
+                            </form>
+                        </div>
+                        <div class="modal-footer justify-content-center" style="background-color: rgb(223, 223, 223);">
+                       
+                         
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>        
+       
+ 
+   
+</body>

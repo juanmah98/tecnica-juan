@@ -1,10 +1,10 @@
 <body>
-    <div class="bg-login pt-3 pb-4 shadow text-center">
+    <div  class="bg-login pt-3 pb-4 shadow text-center">
 
         <img  width="15%" src="../../../../assets/Imagenes/Logos/user.png"/>
          <p class="fs-2 login">Registrate</p>
     
-          <form   [formGroup]="registerForm"(onSubmit)="register()" >
+          <form *ngIf="!newUser"  [formGroup]="registerForm"(onSubmit)="register()" >
             <div class="pt-0">
                
                 <input type="text" placeholder="Nombre de usuario"  class="rounded shadow px-3 " formControlName="name" style="border: none;">                       
@@ -15,7 +15,7 @@
                <input type="text" placeholder="Email" class="rounded shadow px-3 " formControlName="email" style="border: none;">   
             </div>
             <span class="error">{{ getError('email')}}</span>            
-            <span class="error">{{ emailDuplicado()}}</span>            
+            <span *ngIf="!aux" class="error">{{ emailDuplicado()}}</span>            
     
              <div class="pt-2 justify-content-center">
                <input type="password" placeholder="Contraseña" class="rounded shadow px-3 " formControlName="password" style="border: none;">   
@@ -39,7 +39,16 @@
             
          </form>
            
-        
+         <div *ngIf="newUser" class="d-flex align-items-center justify-content-center pb-5">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="visually-hidden"></span><br>
+            
+            
+          </div>
+          <p class="text-light fs-5 pt-3 px-2">Loading...</p>
+        </div>
       
     </div>
+
+   
 </body>

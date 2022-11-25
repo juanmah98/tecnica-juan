@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Registro } from '../../../interfaces/registro';
 
 
 
@@ -10,15 +12,18 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   
   
-  constructor() { }
+  constructor(private usuariosServices: UsuariosService) { }
   
+  usuarios:Registro[] =[];
+  email: string ="";
   registro:boolean = false;
-
   actualizar(regis: boolean) {
     this.registro = regis;
  }
 
-  ngOnInit(): void {    
+  ngOnInit(): void {   
+    
+   
   }
 
 
