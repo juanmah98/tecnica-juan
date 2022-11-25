@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Tareas } from 'src/app/interfaces/tareas';
 import { TareasService } from 'src/app/services/tareas.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-escribir-tarea',
@@ -25,7 +26,7 @@ export class EscribirTareaComponent implements OnInit {
 
   id:string = '0';
 
-  constructor( private tareasServices: TareasService, private formBuilder: FormBuilder) { 
+  constructor( private tareasServices: TareasService, private formBuilder: FormBuilder, private usuarioServices: UsuariosService) { 
    
     this.registerForm = this.formBuilder.group(
       {
@@ -38,7 +39,7 @@ export class EscribirTareaComponent implements OnInit {
 
 
   ngOnInit(): void {
-   this.id = sessionStorage.getItem("length") as string
+    this.id = this.usuarioServices.getLength();
   }
 
 
@@ -70,17 +71,16 @@ export class EscribirTareaComponent implements OnInit {
       };  
  
    
-  const resp = await this.tareasServices.postTareaCloud(this.nuevaTarea, this.idUser);  
-       console.log(resp)   
+  await this.tareasServices.postTareaCloud(this.nuevaTarea, this.idUser);  
+      
 
-       
+  
+       this.clear();
        this.ngOnInit();
 
-       this.clear();
    }
 
    clear() {
-    console.log("clear clicked")
     this.registerForm.reset();
   }
 }

@@ -6,7 +6,10 @@
                     <div class="p-3 estilo shadow " [ngClass]="tareas.lista == false ? 'estilo' : 'estiloListo' " >
 
                         <p class="text-center fs-5 fw-bold">{{tareas.name}}</p>
-                        <p class="fs-6">{{tareas.body}}</p>
+                        <div class="">
+
+                            <p class="fs-6">{{tareas.body}}</p>
+                        </div>
 
                         <div  class="text-center pt-2" *ngIf="tareas.lista==false">
                             <button class="btn btn-dark mx-2" (click)="tareaLista(tareas)">Tarea lista</button>

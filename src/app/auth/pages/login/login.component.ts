@@ -39,12 +39,13 @@ export class LoginComponent implements OnInit {
   }
 
   public getError(controlName: string): string {
+  
     let error = '';
     const control = this.registerForm.get(controlName);
     if (control.touched && control.errors != null) {
       if(controlName == 'email'){
         error = 'email invalido'
-      }else  error = 'password invalido'
+      }else  error = 'contraseña invalida'
     }
     return error;
   }
@@ -61,18 +62,16 @@ export class LoginComponent implements OnInit {
   
   ngOnInit(): void {
      this.aux=false;
-   this.googleLog();
+   /* this.googleLog(); */
       
      
    }
 
-  async googleLog(){
+ /*  async googleLog(){
     sessionStorage.setItem("login", '0');
    await google.accounts.id.initialize({
-      /* LOCAL */
-      client_id: '58855272070-p13uorikkjp4k71fr4u82422p0d6tgtj.apps.googleusercontent.com',  
-      /*  */
-      /*  client_id: '58855272070-ddl9hj8uq3e3vs79cnflfdmckl3usm65.apps.googleusercontent.com',      */
+   
+    client_id: '58855272070-ddl9hj8uq3e3vs79cnflfdmckl3usm65.apps.googleusercontent.com',    
       callback: this.handleCredentialResponse
     });
     google.accounts.id.renderButton(
@@ -80,9 +79,9 @@ export class LoginComponent implements OnInit {
       { theme: "outline", size: "large" } 
     );
     google.accounts.id.prompt(); 
-   }
+   } */
  
-   handleCredentialResponse(response:any){
+ /*   handleCredentialResponse(response:any){
     
  
      if(response.credential){
@@ -109,7 +108,7 @@ export class LoginComponent implements OnInit {
     
      }
       
-   }
+   } */
 
 
   registrarse(){
@@ -118,31 +117,34 @@ export class LoginComponent implements OnInit {
   }
 
   async log(){
-    this.errorEmail = 'el usuario no existe'
-    this.errorPassword = ''
-    console.log('logueo');
-    console.log(this.registerForm.value)
-    /* const respnse = await this.usuarioSerivces.addUser(this.usuario); */
-
+    this.errorEmail = ''
+    this.errorPassword = ''   
+    console.log("LOGIN")
    await this.usuarioSerivces.getUsers().subscribe(prod => {
   
       this.users = prod;     
    
       for (var i = 0; i < this.users.length; i++) {
         
-        console.log(this.registerForm.value.email)
+       
         if(this.users[i].email == this.registerForm.value.email){
           this.errorEmail = ''
 
           if(this.users[i].password == this.registerForm.value.password){
+          /*   this.usuarioSerivces.addEmail(this.users[i].email)
+            this.usuarioSerivces.addIdUser(this.users[i].id)
+            this.usuarioSerivces.addName(this.users[i].name)
+            this.usuarioSerivces.loginUser(true); */
+
             sessionStorage.setItem("login", '1');
+            sessionStorage.setItem("id", this.users[i].id);
             sessionStorage.setItem("email", this.users[i].email);
-        sessionStorage.setItem("name",  this.users[i].name);
+        sessionStorage.setItem("name",  this.users[i].name); 
         this.aux=true;
             document.location.href = "/tareas"  
-          }else this.errorPassword = 'contraseña incorrecta'
+          }else{ this.errorPassword = 'contraseña incorrecta';  this.aux=true;}
          
-        }
+        }else {this.errorEmail = 'el usuario no existe';  this.aux=false;}
       }
     });  
   }

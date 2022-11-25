@@ -15,6 +15,7 @@ export class TareasHomeComponent implements OnInit {
   idUsuario = '';
   email: string ="";
    bandera:boolean = false;
+   carga:boolean = false;
    nuevoRegistro:Registro = {
      id: '',
      email: '',
@@ -25,8 +26,13 @@ export class TareasHomeComponent implements OnInit {
   constructor(private usuariosServices: UsuariosService, private tareasServices:TareasService) { }
 
   ngOnInit(): void {
-    this.auxiliar();
     
+    /* this.auxiliar(); */
+    this.email = this.usuariosServices.getEmail();
+    this.idUsuario =  this.usuariosServices.getIdUser();
+    console.log(this.idUsuario)
+    console.log(this.email);
+    this.getTareas(this.idUsuario);
    
   }
 
@@ -34,48 +40,74 @@ export class TareasHomeComponent implements OnInit {
      /* OBTENGO EL ID DE LA TABLA USER CON EL EMAIL DEL USUARIO. AL IGUAL QUE,
     GUARDO EN FIRESTORE EL EMAIL CON INICIO DE SECION GOOGLE SI ES LA PRIMERA VES QUE ENTRA */
     
-    let email = await sessionStorage.getItem("email") as string;
+  /*   let email = await sessionStorage.getItem("email") as string;
     this.email = email;
 
     await this.usuariosServices.getUsers().subscribe(prod => {
   
-      this.usuarios = prod;     
-   
-      for (var i = 0; i < this.usuarios.length; i++) {
-        
-        
-        if(this.usuarios[i].email == email){
-          this.bandera = true;                
-          this.idUsuario = this.usuarios[i].id;
-          console.log("for");
-          console.log(this.idUsuario)
-          this.getTareas();
-        }
+      this.usuarios = prod;      
+      this.carga = true;   
       
-      }
-      
-    });
+    }); */
 
-   await setTimeout(() => {     
-          if(this.bandera == false){
-            this.nuevoRegistro.email = email;
-         this.usuariosServices.addUser(this.nuevoRegistro);           
-          }              
-    },1500)
+   
+    /* for (var i = 0; i < this.usuarios.length; i++) {
+        
+        
+      if(this.usuarios[i].email == email){
+        this.bandera = true;                
+        this.idUsuario = this.usuarios[i].id;
+        console.log("for");
+        console.log(this.idUsuario)
+        this.getTareas();
+      }
+         
+    
+    }  */
+
+   /*  this.usuarios.forEach(i=>{
+         
+      if(i.email == email){
+        this.bandera = true;                
+        this.idUsuario = i.id;
+        console.log("for");
+        console.log(i)
+        this.getTareas();
+      }
+    }) */
+/* if(this.carga==true){
+  let aux:Registro[] = this.usuarios.filter(x => x.email ==email)
+    console.log(aux);
+    console.log(aux[0].email);
+    console.log("EMAIL");
+    if(aux.length==null){
+      console.log("El usuario es nuevo");
+      this.nuevoRegistro.email = email;
+      this.usuariosServices.addUser(this.nuevoRegistro);    
+    }else this.getTareas(aux[0].id);
+}else await setTimeout(() => { this.auxiliar()  },100); */
+  
+ /*    if(this.bandera != true && this.idUsuario==''){
+      console.log("El usuario es nuevo");
+      this.nuevoRegistro.email = email;
+   this.usuariosServices.addUser(this.nuevoRegistro);           
+    }else console.log("Usuario ya creado"); */
+                 
+    
+  
    
   }
 
- async getTareas(){
-  console.log("home tarea")
-  console.log(this.idUsuario)
-    await this.tareasServices.getTareasCloud(this.idUsuario).subscribe(prod => {  
+ async getTareas(id:string){
+    await this.tareasServices.getTareasCloud(id).subscribe(prod => {  
+     
       this.tareas = prod.sort((a, b) => {
+        
         return a.post_id - b.post_id;
-      });
-      /* this.tareas = prod; */
-      sessionStorage.setItem("length", String(prod.length));    
-      
-      console.log(prod);
+        
+      });   
+      sessionStorage.setItem("length", String(prod.length));     
+     
   
     });
   }

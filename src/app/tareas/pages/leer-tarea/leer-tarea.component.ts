@@ -66,8 +66,8 @@ export class LeerTareaComponent implements OnInit {
 
    await this.tareasServices.getTareasCloud(this.idUser).subscribe(prod => {  
       this.tareas = prod;
-      sessionStorage.setItem("length", String(prod.length));          
-      console.log(prod);
+      /* sessionStorage.setItem("length", String(prod.length));   */        
+     
   
     });
   
@@ -102,7 +102,7 @@ export class LeerTareaComponent implements OnInit {
     this.tareaEditar.name = this.registerForm.value.name;
     this.tareaEditar.body =  this.registerForm.value.body;
     
-    const response = await this.tareasServices.putTareaCloud(this.tareaEditar, this.idUser);   
+    await this.tareasServices.putTareaCloud(this.tareaEditar, this.idUser);   
   }
 
   

@@ -5,6 +5,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UsuariosService } from '../services/usuarios.service';
+import { TareasService } from '../services/tareas.service';
 
 
 
@@ -20,6 +22,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule ,
     
-  ]
+  ],
+  providers:[UsuariosService, TareasService]
 })
 export class AuthModule { }

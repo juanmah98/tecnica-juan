@@ -6,6 +6,8 @@ import { EscribirTareaComponent } from './pages/escribir-tarea/escribir-tarea.co
 import { LeerTareaComponent } from './pages/leer-tarea/leer-tarea.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TareasHomeComponent } from './pages/tareas-home/tareas-home.component';
+import { UsuariosService } from '../services/usuarios.service';
+import { TareasService } from '../services/tareas.service';
 
 
 @NgModule({
@@ -19,6 +21,7 @@ import { TareasHomeComponent } from './pages/tareas-home/tareas-home.component';
     TareasRoutingModule,
     FormsModule,
     ReactiveFormsModule ,
-  ]
+  ],
+  providers:[UsuariosService, TareasService]
 })
 export class TareasModule { }
